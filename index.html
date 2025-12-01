@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LeBe❤️</title>
+
+  <!-- Überschriften-Font (Google Fonts) -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --accent:#ab057c;
+      --bg:#f7fafc;
+      --card:#ffffff;
+      --text:#0f172a;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; background:var(--bg); color:var(--text);
+    }
+
+    header{
+      background:linear-gradient(90deg, #ffffff 0%, #eef2f6 100%);
+      padding:18px 20px; box-shadow:0 2px 6px rgba(10,10,10,0.04);
+      position:sticky; top:0; z-index:20;
+    }
+    .container{max-width:1100px; margin:0 auto}
+
+    h1{font-family: 'Montserrat', sans-serif; margin:0 0 6px; font-size:20px}
+    p.lead{margin:0; color:#475569}
+
+    /* Kategorien-Leiste */
+    .categories{display:flex; gap:10px; margin-top:14px; flex-wrap:wrap}
+    .cat-btn{background:transparent; border:1px solid transparent; padding:8px 12px; border-radius:8px; cursor:pointer; font-weight:600}
+    .cat-btn:hover{border-color:rgba(43,108,176,0.12); background:rgba(43,108,176,0.05)}
+    .cat-btn.active{background:var(--accent); color:white}
+
+    /* Grid */
+    main{padding:28px 20px}
+    .grid{display:grid; gap:18px; grid-template-columns:repeat(auto-fill, minmax(220px,1fr)); max-width:1100px; margin:0 auto}
+    .card{background:var(--card); border-radius:12px; overflow:hidden; box-shadow:0 6px 18px rgba(20,20,30,0.04); display:flex; flex-direction:column}
+    .card img{width:100%; height:260px; object-fit:cover; display:block}
+    .card-body{padding:12px}
+    .card h3{margin:0 0 6px; font-family:'Montserrat',sans-serif; font-size:16px}
+    .price{font-weight:700}
+
+    /* Hilfs-Styles */
+    .hidden{display:none !important}
+    @media (max-width:520px){ .card img{height:140px} h1{font-size:18px} }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>Produkt Übersicht</h1>
+      <p class="lead">
+        <a href="https://www.instagram.com/_lebe_17?utm_source=qr&igsh=azZneGp1ZGZ1dWNn" target="_blank" style="text-decoration:none; color:blue">
+          Klicke hier und produkte auf Instergram zu bestellen 
+        </a>
+      </p>
+
+      <div class="categories" role="tablist" aria-label="Kategorien">
+        <button class="cat-btn active" data-filter="all">Alle</button>
+        <button class="cat-btn" data-filter="Vasen">Vasen</button>
+        <button class="cat-btn" data-filter="Lichter">Lichter</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="grid container" id="items">
+
+      <!-- Vasen - BILD 1 -->
+      <a href="./Vase1/index.html" style="text-decoration:none; color:inherit;">
+        <article class="card" data-category="Vasen">
+          <img src="./Vase1/Vase1Main.jpg" alt="Bild 1 Vasen">
+          <div class="card-body">
+            <h3>Vase Nr.1 - Vasen</h3>
+            <div class="price">€12,99</div>
+          </div>
+        </article>
+      </a>
+
+      <!-- Vasen - BILD 2 -->
+      <a href="./Vase2/index.html" style="text-decoration:none; color:inherit;">
+        <article class="card" data-category="Vasen">
+          <img src="./Vase2/Vase2Main.jpg" alt="Bild 2 Vasen">
+          <div class="card-body">
+            <h3>Vase Nr. 2 - Vasen</h3>
+            <div class="price">€19,99</div>
+          </div>
+        </article>
+      </a>
+
+      <!-- Lampen - BILD 1 -->
+      <a href="./Lamp1/index.html" style="text-decoration:none; color:inherit;">
+        <article class="card" data-category="Lichter">
+          <img src="./Lamp1/Lamp1Main.jpg" alt="Bild 1 Lichter">
+          <div class="card-body">
+            <h3>Lampe Nr. 1 - Lichter</h3>
+            <div class="price">€16,99</div>
+          </div>
+        </article>
+      </a>
+
+      <!-- Lampen - BILD 2 -->
+      <a href="./Lamp2/index.html" style="text-decoration:none; color:inherit;">
+        <article class="card" data-category="Lichter">
+          <img src="./Lamp2/Lamp2Main.jpg" alt="Bild 2 Lichter">
+          <div class="card-body">
+            <h3>Lampe Nr. 2 - Lichter</h3>
+            <div class="price">€14,99</div>
+          </div>
+        </article>
+      </a>
+
+      <!-- Licht - Tee -->
+      <a href="./TeeLicht/index.html" style="text-decoration:none; color:inherit;">
+        <article class="card" data-category="Lichter">
+          <img src="./TeeLicht/TeeMain.jpg" alt="TeeLicht">
+          <div class="card-body">
+            <h3>Lampe Nr. 2 - Lichter</h3>
+            <div class="price">€4,99</div>
+          </div>
+        </article>
+      </a>
+
+    </div>
+  </main>
+
+  <script>
+    // Kategorie-Filter
+    const buttons = document.querySelectorAll('.cat-btn');
+    const cards = document.querySelectorAll('.card');
+
+    function setActive(btn){
+      buttons.forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+    }
+
+    function filter(category){
+      cards.forEach(card=>{
+        const cat = card.getAttribute('data-category');
+        if(category === 'all' || cat === category){
+          card.parentElement.classList.remove('hidden'); // <a> Tag sichtbar
+        } else {
+          card.parentElement.classList.add('hidden');    // <a> Tag ausblenden
+        }
+      });
+    }
+
+    buttons.forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        const category = btn.getAttribute('data-filter');
+        setActive(btn);
+        filter(category);
+      });
+    });
+  </script>
+</body>
+</html>
