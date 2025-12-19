@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LeBe❤️</title>
+
+  <!-- ⭐ Favicon hinzugefügt -->
+  <link rel="icon" type="image/png" href="logo.png">
+
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --accent: #ab057c;
+      --bg: #f7fafc;
+      --card: #ffffff;
+      --text: #0f172a;
+    }
+
+    * { box-sizing: border-box }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    header {
+      background: linear-gradient(90deg, #ffffff 0%, #eef2f6 100%);
+      padding: 18px 20px;
+      box-shadow: 0 2px 6px rgba(10,10,10,0.04);
+      position: sticky;
+      top: 0;
+      z-index: 20;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      font-family: 'Montserrat', sans-serif;
+      margin: 0 0 6px;
+      font-size: 20px;
+    }
+
+    p.lead {
+      margin: 0;
+      color: #475569;
+    }
+
+    .categories {
+      display: flex;
+      gap: 10px;
+      margin-top: 14px;
+      flex-wrap: wrap;
+    }
+
+    .cat-btn {
+      background: transparent;
+      border: 1px solid transparent;
+      padding: 8px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .cat-btn:hover {
+      border-color: rgba(43,108,176,0.12);
+      background: rgba(43,108,176,0.05);
+    }
+
+    .cat-btn.active {
+      background: var(--accent);
+      color: white;
+    }
+
+    main {
+      padding: 28px 20px;
+    }
+
+    .grid {
+      display: grid;
+      gap: 18px;
+      grid-template-columns: repeat(4, 1fr);
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 6px 18px rgba(20,20,30,0.04);
+      display: flex;
+      flex-direction: column;
+    }
+
+
+    .card img {
+      width: 100%;        /* volle Breite der Karte */
+      aspect-ratio: 1/1;  /* Höhe = Breite -> quadratisch */
+      object-fit: cover;   /* Bild wird zugeschnitten, nicht verzerrt */
+      display: block;
+    }
+
+
+    .card-body {
+      padding: 12px;
+    }
+
+    .card h3 {
+      margin: 0 0 6px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 16px;
+    }
+
+    .price {
+      font-weight: 700;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    /* ⭐ NEU: Unterkategorien Styling */
+    .sub-btn {
+      background: transparent;
+      border: 1px solid #ddd;
+      padding: 6px 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      margin-right: 8px;
+    }
+
+    .sub-btn.active {
+      background: #ab057c;
+      color: white;
+    }
+
+    /* Mobile */
+    @media (max-width: 600px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .card img {
+        height: 400px;
+      }
+
+      h1 {
+        font-size: 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>Produktübersicht</h1>
+      <p class="lead">
+        <a href="https://www.instagram.com/_lebe_17?utm_source=qr&igsh=azZneGp1ZGZ1dWNn" target="_blank" style="text-decoration:none; color:blue">
+          Für Sonderwünsche oder Bestellungen hier klicken und gerne anfragen<br>Für mehr Informationen über die Produkte einfach die jeweiligen Produkte anklicken
+        </a>
+      </p>
+
+      <div class="categories" role="tablist" aria-label="Kategorien">
+        <button class="cat-btn active" data-filter="all">Alle</button>
+        <button class="cat-btn" data-filter="Vasen">Vasen</button>
+        <button class="cat-btn" data-filter="Lichter">Lichter</button>
+      </div>
+
+      <!-- ⭐ NEU: Unterkategorie für Lichter -->
+      <div class="subcategories" id="light-subcats" style="display:none; margin-top:10px;">
+        <button class="sub-btn active" data-subfilter="all">Alle Lichter</button>
+        <button class="sub-btn" data-subfilter="Herrnhuter Sternaufsatz">Herrnhuter Sternaufsatz</button>
+      </div>
+
+    </div>
+  </header>
+
+  <main>
+    <div class="grid container" id="items">
+
+      <!-- Vasen -->
+      <a href="./Vase1/index.html" style="text-decoration:none; color:inherit;">
+        <article class="card" data-category="Vasen">
+          <img src="./Vase1/Vase1Main.jpg" alt="Bild 1 Vasen">
+          <div class="card-body">
+            <h3>Vase Nr.1 - Vasen</h3>
+            <div class="price">€16,99</div>
+          </div>
+        </article>
+      </a>
+
+      <a href="./Vase2/index.html" style="text-decoration:none; color:inherit;">
+        <article class="card" data-category="Vasen">
+          <img src="./Vase2/Vase2Main.jpg" alt="Bild 2 Vasen">
+          <div class="card-body">
+            <h3>Vase Nr. 2 - Vasen</h3>
+            <div class="price">€14,99</div>
+          </div>
+        </article>
+      </a>
+
+      <a href="./Vase3/index.html" style="text-decoration:none; color:inherit;">
+        <article class="card" data-category="Vasen">
+          <img src="./Vase3/Vase3Main.jpg" alt="Bild 3 Vasen">
+          <div class="card-body">
+            <h3>Vase Nr. 3 - Vasen</h3>
+            <div class="price">€10,99</div>
+          </div>
+        </article>
+      </a>
+
+      <!-- ⭐ Lichter mit Unterkategorie Kennzeichnung -->
+      <a href="./Lamp1/index.html" style="text-decoration:none; color:inherit;">
+        <article class="card" data-category="Lichter" >
+          <img src="./Lamp1/Lamp1Main.jpg" alt="Bild 1 Lichter">
+          <div class="card-body">
+            <h3>Lampe Nr. 1 - Lichter</h3>
+            <div class="price">€7,99</div>
+          </div>
+        </article>
+      </a>
+
+      
+      <a href="./TeeLicht/index.html" style="text-decoration:none; color:inherit;">
+        <article class="card" data-category="Lichter" > 
+          <img src="./TeeLicht/TeeMain.jpg" alt="TeeLicht">
+          <div class="card-body">
+            <h3>Teelicht - Lichter</h3>
+            <div class="price">€4,99</div>
+          </div>
+        </article>
+      </a>
+      
+      
+      <a href="./Lamp3/index.html" style="text-decoration:none; color:inherit;">
+        <article class="card" data-category="Lichter" data-sub="Herrnhuter Sternaufsatz"> <!-- ⭐ NEU -->
+          <img src="./Lamp3/Lamp3Main.jpg" alt="Bild 3 Lichter">
+          <div class="card-body">
+            <h3>Lampenaufsatz passend für Herrnhuter Stern - Nr. 1 - Lichter</h3>
+            <div class="price">€19,99</div>
+          </div>
+        </article>
+      </a>
+      
+      <a href="./Lamp2/index.html" style="text-decoration:none; color:inherit;">
+        <article class="card" data-category="Lichter" data-sub="Herrnhuter Sternaufsatz"> <!-- ⭐ NEU -->
+          <img src="./Lamp2/Lamp2Main.jpg" alt="Bild 2 Lichter">
+          <div class="card-body">
+            <h3>Lampenaufsatz passend für Herrnhuter Stern - Nr. 2 - Lichter</h3>
+            <div class="price">€19,99</div>
+          </div>
+        </article>
+      </a>      
+
+      <a href="./Lamp4/index.html" style="text-decoration:none; color:inherit;">
+        <article class="card" data-category="Lichter" data-sub="Herrnhuter Sternaufsatz"> <!-- ⭐ NEU -->
+          <img src="./Lamp4/Lamp4Main.jpg" alt="Bild 4 Lichter">
+          <div class="card-body">
+            <h3>Lampenaufsatz passend für Herrnhuter Stern - Nr. 3 - Lichter</h3>
+            <div class="price">€19,99</div>
+          </div>
+        </article>
+      </a>
+
+      
+    </div>
+  </main>
+
+  <script>
+    const buttons = document.querySelectorAll('.cat-btn');
+    const cards = document.querySelectorAll('.card');
+
+    function setActive(btn){
+      buttons.forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+    }
+
+    function filter(category){
+      cards.forEach(card=>{
+        const cat = card.getAttribute('data-category');
+        if(category === 'all' || cat === category){
+          card.parentElement.classList.remove('hidden');
+        } else {
+          card.parentElement.classList.add('hidden');
+        }
+      });
+    }
+
+    buttons.forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        const category = btn.getAttribute('data-filter');
+
+        setActive(btn);
+        filter(category);
+
+        // ⭐ NEU: Unterkategorie sichtbar machen
+        if(category === "Lichter"){
+          document.getElementById("light-subcats").style.display = "flex";
+        } else {
+          document.getElementById("light-subcats").style.display = "none";
+        }
+      });
+    });
+
+    // ⭐ NEU: Unterkategorien
+    const subBtns = document.querySelectorAll(".sub-btn");
+
+    subBtns.forEach(btn=>{
+      btn.addEventListener("click", ()=>{
+        subBtns.forEach(b=>b.classList.remove("active"));
+        btn.classList.add("active");
+
+        const sub = btn.getAttribute("data-subfilter");
+
+        cards.forEach(card=>{
+          const cat = card.getAttribute("data-category");
+          const s = card.getAttribute("data-sub");
+
+          if(cat === "Lichter"){
+            if(sub === "all" || s === sub){
+              card.parentElement.classList.remove("hidden");
+            } else {
+              card.parentElement.classList.add("hidden");
+            }
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>

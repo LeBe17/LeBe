@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lampe3</title>
+  <link rel="icon" type="image/png" href="logo.png">
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+
+    button {
+      padding:10px 16px; 
+      background:#ab057c; 
+      color:white; 
+      border:none; 
+      border-radius:8px; 
+      cursor:pointer;
+    }
+
+    /* Container für Galerie + Textbox */
+    .content-wrapper { 
+      display: flex; 
+      gap: 20px; 
+      margin-top: 20px; 
+      flex-wrap: wrap; 
+    }
+
+    .bild-galerie {
+      display: flex;
+      gap: 20px; 
+      flex: 2;
+    }
+
+    .bild-galerie img {
+      width: 300px; 
+      height: 300px;    /* quadratisch */
+      object-fit: cover; /* Bild wird zugeschnitten, nicht verzerrt */
+      border-radius: 10px;
+    }
+
+    /* ---------------- TEXTBOX ---------------- */
+    .text-box {
+      flex: 1;                       
+      border: 1px solid #ccc;        
+      padding: 15px;                  
+      border-radius: 10px;            
+      height: fit-content;            
+      transition: all 0.3s ease;      
+      order: 2;                       
+    }
+
+    /* Instagram Icon unten rechts */
+    .insta-icon {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 60px;
+      height: 60px;
+      z-index: 9999;
+    }
+
+    .insta-icon img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      transition: 0.2s ease;
+    }
+
+    .insta-icon img:hover {
+      transform: scale(1.1);
+      opacity: 0.9;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .content-wrapper { flex-direction: column; }
+      .bild-galerie { flex-direction: column; align-items: center; }
+      .text-box {
+        order: -1;          
+        margin-bottom: 20px;
+      }
+    }
+
+    /* Verstecken der Textbox */
+    .hide-box { display: none !important; }
+  </style>
+</head>
+
+<body>
+
+<button onclick="window.location.href='../index.html'">Zurück</button>
+
+<div class="content-wrapper" id="contentWrapper">
+  <div class="bild-galerie">
+    <img src="./Lamp3Main.jpg" alt="Lampe 3 Bild 1">
+    <img src="./Lamp3Sub1.jpg" alt="Lampe 3 Bild 2">
+    <img src="./Lamp3Sub2.jpg" alt="Lampe 2 Bild 3">
+  </div>
+</div>
+
+<!-- Instagram Icon -->
+<a href="https://www.instagram.com/_lebe_17?utm_source=qr&igsh=azZneGp1ZGZ1dWNn" target="_blank" class="insta-icon">
+  <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram" />
+</a>
+
+<script>
+  function createTextBox(id, title, content) {
+    const wrapper = document.getElementById('contentWrapper');
+    const box = document.createElement('div');
+    box.className = 'text-box';
+    box.id = id;
+
+    box.innerHTML = `
+      <h2>${title}</h2>
+      <p>${content}</p>
+    `;
+
+    wrapper.appendChild(box);
+
+    window.addEventListener('scroll', () => {
+      if (window.innerWidth <= 900) {
+        if (window.pageYOffset > 50) {
+          box.classList.add('hide-box');
+        } else {
+          box.classList.remove('hide-box');
+        }
+      } else {
+        box.classList.remove('hide-box');
+      }
+    });
+
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 900) {
+        box.classList.remove('hide-box');
+      }
+    });
+  }
+
+  createTextBox(
+    'textBox1',
+    'Informationen zur Lampe',
+    'Der Lampenaufsatz passt perfekt auf Herrnhuter Sterne und sorgt für stimmungsvolles Licht. Er ist 10 cm hoch und in matt-weiß für ein helles Licht oder in matt-beige für ein warmes, goldenes Licht erhältlich.'
+  );
+</script>
+
+</body>
+</html>

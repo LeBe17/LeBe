@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vase3</title>
+  <link rel="icon" type="image/png" href="logo.png">
+
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+
+    button {
+      padding:10px 16px;
+      background:#ab057c; 
+      color:white; 
+      border:none; 
+      border-radius:8px; 
+      cursor:pointer;
+    }
+
+       .content-wrapper { 
+      display: flex; 
+      gap: 20px; 
+      margin-top: 20px; 
+      flex-wrap: wrap; 
+    }
+    .bild-galerie {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      flex: 2;
+    }
+
+    .bild-galerie img { 
+      width: 100%; 
+      height: auto; 
+      border-radius: 10px; 
+    }
+
+
+
+    /* ---------------- TEXTBOX STYLING (jede Zeile kommentiert) ---------------- */
+
+    .text-box {                       /* CSS-Klasse für die Textbox */
+      flex: 1;                        /* Textbox nimmt 1 Anteil im Flex-Container ein */
+      border: 1px solid #ccc;         /* Rahmen um die Box */
+      padding: 15px;                  /* Innenabstand */
+      border-radius: 10px;            /* Abgerundete Ecken */
+      height: fit-content;            /* Höhe passt sich automatisch an */
+      transition: all 0.3s ease;      /* Weiche Übergänge bei Änderungen */
+      order: 2;                       /* Position rechts neben der Bildergalerie */
+    }
+
+    /* Icon irrelevant, daher unkommentiert */
+    .insta-icon { position: fixed; bottom: 20px; right: 20px; width: 60px; height: 60px; z-index: 9999; }
+    .insta-icon img { width: 100%; height: 100%; border-radius: 50%; transition: 0.2s ease; }
+    .insta-icon img:hover { transform: scale(1.1); opacity: 0.9; }
+
+    /* ----------- MEDIA QUERY für mobile screens (Textbox-bezogen kommentiert) ----------- */
+
+    @media (max-width: 900px) {
+      .content-wrapper { flex-direction: column; }
+
+      .bild-galerie { grid-template-columns: 1fr; }
+
+      .text-box {                    /* Verhalten der Textbox auf kleinen Screens */
+        order: -1;                   /* Textbox wandert über die Bilder */
+        margin-bottom: 20px;         /* Abstand nach unten */
+      }
+    }
+
+    /* Klasse zum Verstecken der Textbox */
+    .hide-box { display: none !important; }   /* Textbox wird damit komplett ausgeblendet */
+
+  </style>
+</head>
+
+<body>
+
+<button onclick="window.location.href='../index.html'">Zurück</button>
+
+<div class="content-wrapper" id="contentWrapper">
+  <div class="bild-galerie">
+    <img src="./Vase3Main.jpg" alt="Vase 3 Bild 1">
+    <img src="./Vase3Sub1.jpg" alt="Vase 3 Bild 2">
+    <img src="./Vase3Sub2.jpg" alt="Vase 3 Bild 3">
+  </div>
+</div>
+
+<a href="https://www.instagram.com/_lebe_17?utm_source=qr&igsh=azZneGp1ZGZ1dWNn" target="_blank" class="insta-icon">
+  <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram" />
+</a>
+
+<script>
+
+  /* ------------------- FUNKTION zum Erstellen der Textbox ------------------- */
+
+  function createTextBox(id, title, content) {      // Start der Funktion, die eine Textbox erzeugt
+    const wrapper = document.getElementById('contentWrapper');  
+                                                     // Container abrufen, in den die Textbox eingefügt wird
+
+    const box = document.createElement('div');       // Neue Textbox als div erzeugen
+    box.className = 'text-box';                      // Textbox erhält die CSS-Klasse .text-box
+    box.id = id;                                     // Setzt eine einzigartige ID
+
+    box.innerHTML = `                            
+      <h2>${title}</h2>                          
+      <p>${content}</p>                          
+    `;
+
+    wrapper.appendChild(box);                        // Fügt die Textbox in den Seiteninhalt ein
+
+
+    /* ----------- SCROLL-Event: Verhalten für mobile Geräte ----------- */
+
+    window.addEventListener('scroll', () => {        // Bei jedem Scrollen prüfen
+      if (window.innerWidth <= 900) {                // Nur aktiv, wenn Bildschirm ≤ 900px breit
+        if (window.pageYOffset > 50) {               // Wenn Nutzer 50px oder mehr gescrollt hat
+          box.classList.add('hide-box');             // Textbox ausblenden
+        } else {
+          box.classList.remove('hide-box');          // Textbox wieder anzeigen
+        }
+      } else {
+        box.classList.remove('hide-box');            // Textbox bleibt auf Desktop immer sichtbar
+      }
+    });
+
+
+    /* ----------- RESIZE-Event: Verhalten beim Fenstergrößen ändern ----------- */
+
+    window.addEventListener('resize', () => {        // Beim Ändern der Fenstergröße
+      if (window.innerWidth > 900) {                 // Wenn Fenster wieder größer wird
+        box.classList.remove('hide-box');            // Sicherstellen, dass Box sichtbar ist
+      }
+    });
+  }
+
+  /* ---------------- Textbox wird hier erstellt ---------------- */
+
+  createTextBox(
+    'textBox1',                                     
+    'Informationen zur Vase',                        
+    'Die Vase ist 10 cm hoch und in matt-schwarz, matt-weiß, matt-grau sowie matt-beige erhältlich.'
+                                                     
+  );
+
+</script>
+
+</body>
+</html>
